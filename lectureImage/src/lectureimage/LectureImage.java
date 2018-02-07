@@ -18,6 +18,7 @@ public class LectureImage
     public static void main(String[] args)
     {
         System.out.println("EST-CE QUE ÇA MARCHE????????????????");
+        System.out.println("???");
     }
     
 }
