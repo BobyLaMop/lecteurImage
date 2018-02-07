@@ -8,17 +8,18 @@ package lectureimage;
 /**
  *
  * @author Simon
+ * @author Pierre-Luc
+ * @author Mr. True
  */
 public class LectureImage
 {
-
+//Ta mère
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args)
     {
-        System.out.println("EST-CE QUE ÇA MARCHE????????????????");
-        System.out.println("???");
+        System.out.println("Perlinpinpin, ça fonctionne!");
     }
     
 }
