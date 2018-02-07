@@ -6,7 +6,7 @@
 package lectureimage;
 
 /**
- *qweqweqweqwewq
+ *qweqweqweqwewqqfqfqfq
  * @author Christopher True
  */
 public class pixel 
