@@ -12,7 +12,7 @@ package lectureimage;
  */
 public class LectureImage
 {
-
+//Ta mère
     /**
      * @param args the command line arguments
      */
