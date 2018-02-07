@@ -9,32 +9,39 @@ package lectureimage;
  *
  * @author Christopher True
  */
-public class pixel {
+public class pixel 
+{
     int rouge;
     int vert;
     int bleu;
 
-    public int getRouge() {
+    public int getRouge() 
+    {
         return rouge;
     }
 
-    public void setRouge(int rouge) {
+    public void setRouge(int rouge) 
+    {
         this.rouge = rouge;
     }
 
-    public int getVert() {
+    public int getVert() 
+    {
         return vert;
     }
 
-    public void setVert(int vert) {
+    public void setVert(int vert) 
+    {
         this.vert = vert;
     }
 
-    public int getBleu() {
+    public int getBleu() 
+    {
         return bleu;
     }
 
-    public void setBleu(int bleu) {
+    public void setBleu(int bleu) 
+    {
         this.bleu = bleu;
     }
     
