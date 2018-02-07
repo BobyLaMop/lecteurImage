@@ -8,6 +8,7 @@ package lectureimage;
 /**
  *
  * @author Simon
+ * @author Pierre-Luc
  */
 public class LectureImage
 {
