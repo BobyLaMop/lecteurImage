@@ -19,7 +19,10 @@ public class LectureImage
      */
     public static void main(String[] args)
     {
-        System.out.println("Perlinpinpin, ça fonctionne!");
+        Fichier fichierFrontenac = new Fichier("ppm","Sherbrooke_Frontenac_nuit");
+        Image imageFrontenac = new Image();
+        TraiteurImage.lire(imageFrontenac, fichierFrontenac);
+        
     }
     
 }
