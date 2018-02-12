@@ -15,6 +15,14 @@ public class Pixel
     int vert;
     int bleu;
 
+    public Pixel(int rouge, int vert, int bleu)
+    {
+        this.rouge = rouge;
+        this.vert = vert;
+        this.bleu = bleu;
+    }
+    
+    
     public int getRouge() 
     {
         return rouge;

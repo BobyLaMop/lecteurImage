@@ -6,6 +6,7 @@
 package lectureimage;
 
 import java.io.File;
+import java.nio.file.Path;
 
 /**
  *
@@ -14,14 +15,16 @@ import java.io.File;
 public class Fichier
 {
     String type;
+    String nomFichier;
     File fichier;
 
-    public Fichier(String type, File fichier)
+    public Fichier(String type, String nomFichier)
     {
         this.type = type;
-        this.fichier = fichier;
+        this.nomFichier = nomFichier;
+        fichier = new File("src/Fichiers/" + nomFichier +"."+ type);
     }
-
+    
     public String getType()
     {
         return type;
@@ -30,6 +33,16 @@ public class Fichier
     public void setType(String type)
     {
         this.type = type;
+    }
+
+    public String getNomFichier()
+    {
+        return nomFichier;
+    }
+
+    public void setNomFichier(String nomFichier)
+    {
+        this.nomFichier = nomFichier;
     }
 
     public File getFichier()
@@ -41,5 +54,8 @@ public class Fichier
     {
         this.fichier = fichier;
     }
+
+    
+    
     
 }
