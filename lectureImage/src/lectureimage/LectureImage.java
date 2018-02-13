@@ -23,6 +23,8 @@ public class LectureImage
         Image imageFrontenac = new Image();
         TraiteurImage.lire(imageFrontenac, fichierFrontenac);
         
+        Fichier test = new Fichier("ppm","test1");
+        
     }
     
 }
