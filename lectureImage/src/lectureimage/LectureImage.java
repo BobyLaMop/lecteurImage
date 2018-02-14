@@ -5,6 +5,8 @@
  */
 package lectureimage;
 
+import java.nio.charset.Charset;
+
 /**
  *
  * @author Simon
@@ -19,11 +21,13 @@ public class LectureImage
      */
     public static void main(String[] args)
     {
-        Fichier fichierFrontenac = new Fichier("ppm","Sherbrooke_Frontenac_nuit");
+        Fichier fichierFrontenac = new Fichier("ppm","Sherbrooke_Frontenac_nuit",Charset.forName("US-ASCII"));
         Image imageFrontenac = new Image();
         TraiteurImage.lire(imageFrontenac, fichierFrontenac);
         
-        Fichier test = new Fichier("ppm","test1");
+        Fichier test = new Fichier("ppm","test1",Charset.forName("US-ASCII"));
+        Fichier test2 = new Fichier("pgm","test2",Charset.forName("US-ASCII"));
+        TraiteurImage.ecrire(test, imageFrontenac);
         
     }
     

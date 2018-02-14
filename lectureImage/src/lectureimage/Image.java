@@ -28,6 +28,11 @@ public class Image {
         this.format = format;
         this.largeur = largeur;
         this.hauteur = hauteur;
+        construireMatrice();
+    }
+    
+    public void construireMatrice()
+    {
         matrice = new Pixel[hauteur][largeur];
     }
     
