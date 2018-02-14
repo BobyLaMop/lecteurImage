@@ -1,18 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/* En-tête du programme
+====================================================================================================
+Fichier:            LectureImage.java (TP1)
+Auteur:             Simon Lagacé, Christopher True et Pierre-Luc Pépin
+Date création:      01/02/2018
+But:                Classe permettant de faire des tests pour les méthodes de la classe TraiteurImage
+                    qui permet de manipuler des fichiers et images de type ppm et pgm
+====================================================================================================
+*/
 package lectureimage;
 
 import java.nio.charset.Charset;
 import java.util.Objects;
 
 /**
- *
- * @author Simon
- * @author Pierre-Luc
- * @author Mr. True
+ * Classe de main pour les tests de manipulations de fichiers et 
+ * d'images ppm et pgm
+ * @author Simon Lagacé
+ * @author Pierre-Luc Pépin
+ * @author Christopher True
  */
 public class LectureImage
 {

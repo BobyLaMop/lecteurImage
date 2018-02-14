@@ -1,8 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/* En-tête du programme
+====================================================================================================
+Fichier:            Image.java (TP1)
+Auteur:             Simon Lagacé, Christopher True et Pierre-Luc Pépin
+Date création:      01/02/2018
+But:                Classe qui permet de faire la manipulation d'image et de
+                    fichier en format ppm et pgm.
+====================================================================================================
+*/
 package lectureimage;
 
 import java.io.BufferedWriter;
@@ -14,12 +18,22 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- *
- * @author Simon
+ * Classe qui permet de faire la manipulation d'image et de fichier en 
+ * format ppm (portable pixel map) et pgm (portable grey map) avec entre autre,
+ * des méthodes de lecture et d'écriture
+ * 
+ * @author Christopher True
+ * @author Simon Lagacé
+ * @author Pierre-Luc Pépin
  */
 public class TraiteurImage
 {
 
+    /**
+     * Ouvre en lecture le fichier en format PGM ou PPM spécifié et charge les données dans l’image
+     * @param i Image dans laquelle on veut charger les données du fichier
+     * @param f Fichier duquel on veut lire les données
+     */
     public static void lire(Image i, Fichier f)
     {
         try
@@ -63,9 +77,7 @@ public class TraiteurImage
                             y = 0;
                             x++;
                         }
-
                     }
-
                 }
             } //Lecture si c'est un fichier ppm
             else if (ligne.equals("P3"))
@@ -111,12 +123,8 @@ public class TraiteurImage
                             y = 0;
                             x++;
                         }
-                        
                     }
-                    
-
                 }
-             
             }
             scan.close();
         } //Exception fichier non trouvé
@@ -130,13 +138,18 @@ public class TraiteurImage
         }
     }
 
+    /**
+     * Ouvre le fichier spécifié et y sauvegarde en format PGM ou PPM l’image
+     * @param f Fichier que l'on veut sauvegarder les données de l'image
+     * @param i Image que l'on veut lire les données
+     */
     public static void ecrire(Fichier f, Image i)
     {
         //Si le fichier et l'image sont de même format 
         if (f.getType().equals(i.getFormat()))
         {
 
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(f.getFichier())))//Files.newBufferedWriter(f.getPath(), charset))
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(f.getFichier())))
             {
                 if (i.getFormat().equals("pgm"))
                 {
@@ -198,6 +211,11 @@ public class TraiteurImage
         }
     }
     
+    /**
+     * Fait une copie de l'image i1 dans l'image i2
+     * @param i1 Image que l'on veut copier
+     * @param i2 Image dans laquelle on copie
+     */
     public static void copier(Image i1, Image i2)
     {
         i2.setFormat(i1.getFormat());
@@ -206,6 +224,12 @@ public class TraiteurImage
         i2.setMatrice(i1.getMatrice());
     }
     
+    /**
+     * Retourne la couleur la plus prépondérante dans l'image i sous forme de 
+     * pixel
+     * @param i Image que l'on veut trouver la couleur prépondérante
+     * @return La couleur prépondérante en pixel
+     */
     public static Pixel couleur_preponderante(Image i)
     {
         long[] total = {0,0,0};
@@ -230,6 +254,12 @@ public class TraiteurImage
         return new Pixel((int)total[0],(int)total[1],(int)total[2]);
     }
     
+    /**
+     * Éclaircit ou noircit l'image selon une valeur donnée
+     * @param i L'image que l'on veut éclaircir ou noircir
+     * @param v La valeur d'éclaircissement (posistif)  
+     *          ou de noircissement (négatif)
+     */
     public static void eclaircir_noircir(Image i, int v)
     {
        for(int j =0;j<i.getHauteur();j++)
@@ -239,6 +269,12 @@ public class TraiteurImage
             } 
     }
     
+    /**
+     * Retourne vrai si les deux images sont identiques, faux sinon
+     * @param i1 Image que l'on veut comparer
+     * @param i2 Image 2 que l'on veut comparer
+     * @return Si les deux images sont identiques ou non
+     */
     public static boolean sont_identique(Image i1, Image i2)
     {
         
@@ -257,6 +293,10 @@ public class TraiteurImage
         return true;
     }
     
+    /**
+     * Fait pivoter l'image de 90 degrée vers la droite
+     * @param img Image que l'on veut faire pivoter
+     */
     public static void pivoter90(Image img)
     {
         Pixel[][] temp = new Pixel[img.getLargeur()][img.getHauteur()];
