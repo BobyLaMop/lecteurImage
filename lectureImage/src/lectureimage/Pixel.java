@@ -22,6 +22,17 @@ public class Pixel
         this.bleu = bleu;
     }
     
+    public boolean egal(Pixel p)
+    {
+        return (rouge==p.rouge && vert==p.vert && bleu==p.bleu);
+    }
+    
+    public void changerCouleur(int v)
+    {
+        rouge+=v;
+        vert+=v;
+        bleu+=v;
+    }
     
     public int getRouge() 
     {

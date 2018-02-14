@@ -132,8 +132,6 @@ public class TraiteurImage
 
     public static void ecrire(Fichier f, Image i)
     {
-        System.out.println(i.getFormat());
-        System.out.println(f.getType());
         //Si le fichier et l'image sont de même format 
         if (f.getType().equals(i.getFormat()))
         {
@@ -142,7 +140,7 @@ public class TraiteurImage
             {
                 if (i.getFormat().equals("pgm"))
                 {
-                    //Entete du fichier
+                    //Écriture de l'entete du fichier
                     writer.write("P2", 0, 2);
                     writer.newLine();
                     writer.write(Integer.toString(i.getHauteur()), 0, Integer.toString(i.getHauteur()).length());
@@ -152,7 +150,7 @@ public class TraiteurImage
                     writer.write("255", 0, 3);
                     writer.newLine();
 
-                    //Pixels
+                    //Écriture des pixels
                     for (int j = 0; j < i.getHauteur(); j++)
                     {
                         for (int k = 0; k < i.getLargeur(); k++)
@@ -164,7 +162,7 @@ public class TraiteurImage
                     }
                 } else if (i.getFormat().equals("ppm"))
                 {
-                    //Entete du fichier
+                    //Écriture de l'entete du fichier
                     writer.write("P3", 0, 2);
                     writer.newLine();
                     writer.write(Integer.toString(i.getHauteur()), 0, Integer.toString(i.getHauteur()).length());
@@ -174,7 +172,7 @@ public class TraiteurImage
                     writer.write("255", 0, 3);
                     writer.newLine();
 
-                    //Pixels
+                    //Écriture des pixels
                     for (int j = 0; j < i.getHauteur(); j++)
                     {
                         for (int k = 0; k < i.getLargeur(); k++)
@@ -189,9 +187,7 @@ public class TraiteurImage
                         writer.newLine();
                     }
                 }
-
                 writer.close();
-
             } catch (IOException x)
             {
                 System.err.format("IOException: %s%n", x);
@@ -201,11 +197,78 @@ public class TraiteurImage
             System.out.println("Le fichier et l'image ne sont pas de même format!");
         }
     }
-
+    
+    public static void copier(Image i1, Image i2)
+    {
+        i2.setFormat(i1.getFormat());
+        i2.setHauteur(i1.getHauteur());
+        i2.setLargeur(i1.getLargeur());
+        i2.setMatrice(i1.getMatrice());
+    }
+    
+    public static Pixel couleur_preponderante(Image i)
+    {
+        long[] total = {0,0,0};
+        
+        //On parcourt la matrice en additionnant chaque couleur a un total
+        for(int j =0;j<i.getHauteur();j++)
+            for(int k=0;k<i.getLargeur();k++)
+            {
+                total[0]+= i.getMatrice()[j][k].getRouge();
+                total[1]+= i.getMatrice()[j][k].getVert();
+                total[2]+= i.getMatrice()[j][k].getBleu();
+            }
+        
+        //Calcul du nombre de pixel
+        long nbPixel = i.getHauteur() * i.getLargeur();
+        
+        //Calcul des moyennes
+        for(int x=0;x<3;x++)
+        {
+             total[x] = Math.round((double)total[x]/nbPixel);       
+        }
+        return new Pixel((int)total[0],(int)total[1],(int)total[2]);
+    }
+    
+    public static void eclaircir_noircir(Image i, int v)
+    {
+       for(int j =0;j<i.getHauteur();j++)
+            for(int k=0;k<i.getLargeur();k++)
+            {
+                i.getMatrice()[j][k].changerCouleur(v);
+            } 
+    }
+    
     public static boolean sont_identique(Image i1, Image i2)
     {
-        return i1.getFormat().equals(i2.getFormat()) && i1.getHauteur() == i2.getHauteur()
-                && i1.getLargeur() == i2.getLargeur() && Arrays.deepEquals(i1.getMatrice(), i2.getMatrice());
+        
+        if(i1.getFormat().equals(i2.getFormat()) 
+                && i1.getHauteur() == i2.getHauteur()
+                && i1.getLargeur() == i2.getLargeur())
+        {
+            for(int i =0;i<i1.getHauteur();i++)
+                for(int j=0;j<i2.getLargeur();j++)
+                    if(!i1.getMatrice()[i][j].egal(i1.getMatrice()[i][j]))
+                        return false;
+        }
+        else
+            return false;
+        
+        return true;
     }
+    
+    public static void pivoter90(Image img)
+    {
+        Pixel[][] temp = new Pixel[img.getLargeur()][img.getHauteur()];
+        Pixel[][] photo = img.getMatrice();
 
+        for (int i = 0; i < img.getLargeur(); i++) 
+        {
+            for (int j = 0, z = img.getHauteur(); j < img.getHauteur(); j++,z--) 
+            {
+                temp[i][j] = photo[z][i];
+            }
+        }
+        img.setMatrice(temp);
+    }
 }
