@@ -257,15 +257,15 @@ public class TraiteurImage
     /**
      * Éclaircit ou noircit l'image selon une valeur donnée
      * @param i L'image que l'on veut éclaircir ou noircir
-     * @param v La valeur d'éclaircissement (posistif)  
-     *          ou de noircissement (négatif)
+     * @param v La valeur d'éclaircissement (negatif)  
+     *          ou de noircissement (positif)
      */
     public static void eclaircir_noircir(Image i, int v)
     {
        for(int j =0;j<i.getHauteur();j++)
             for(int k=0;k<i.getLargeur();k++)
             {
-                i.getMatrice()[j][k].changerCouleur(v);
+                i.getMatrice()[j][k].changerCouleur(-v);
             } 
     }
     
@@ -291,6 +291,42 @@ public class TraiteurImage
             return false;
         
         return true;
+    }
+    
+     /**
+     * Extrait un sous ensemble de l’image à partir du point p1,c1 jusqu’à p2,c2
+     * @param i Image que l'on veut extraire le sous ensemble
+     * @param x1 Coordonne en x du point d'origine du sous ensemble voulu
+     * @param y1 Coordonne en y du point d'origine du sous ensemble voulu
+     * @param x2 Coordonne en x du point de fin du sous ensemble voulu
+     * @param y2 Coordonne en y du point de fin du sous ensemble voulu
+     * @return Si les deux images sont identiques ou non
+     */
+    public static Image extraire(Image i, int x1, int y1, int x2, int y2)
+    {
+        //Calcul de la nouvelle hauteur et largeur
+        int nouvHauteur = x2 - x1;
+        int nouvLargeur = y2 - y1;
+        
+        //On crée la nouvelle image
+        Image imageExt = new Image(i.getFormat(),nouvLargeur,nouvHauteur);
+        
+        //On copie les pixels de l'image dans la nouvelle
+        for(int j =0;j<nouvHauteur;j++)
+                for(int k=0;k<nouvLargeur;k++)
+                    imageExt.getMatrice()[j][k] = i.getMatrice()[j+x1][k+y1];
+        
+        return imageExt;
+        
+    }
+    
+    /**
+     * Réduit l'image de moitié en appliquant la moyenne des couleurs à chaque
+     * quarts d'image réduit.
+     */
+    public static void reduire(Image i)
+    {
+        
     }
     
     /**
