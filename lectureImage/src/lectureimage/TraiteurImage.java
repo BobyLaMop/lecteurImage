@@ -338,13 +338,16 @@ public class TraiteurImage
         Pixel[][] temp = new Pixel[img.getLargeur()][img.getHauteur()];
         Pixel[][] photo = img.getMatrice();
 
-        for (int i = 0; i < img.getLargeur(); i++) 
+        for (int i = 0; i < img.getLargeur()-1; i++) 
         {
-            for (int j = 0, z = img.getHauteur(); j < img.getHauteur(); j++,z--) 
+            for (int j = 0, z = img.getHauteur()-1; j < img.getHauteur()-1; j++,z--) 
             {
                 temp[i][j] = photo[z][i];
             }
         }
+        int hauteurTemp = img.getHauteur();
         img.setMatrice(temp);
+        img.setHauteur(img.getLargeur()-1);
+        img.setLargeur(hauteurTemp-1);
     }
 }

@@ -53,9 +53,18 @@ public class Pixel
      */
     public void changerCouleur(int v)
     {
+        
         rouge+=v;
         vert+=v;
         bleu+=v;
+        
+        if(rouge<0)
+            rouge =0;
+        if(vert<0)
+            vert =0;
+        if(bleu<0)
+            bleu=0;
+        
     }
     
     /**

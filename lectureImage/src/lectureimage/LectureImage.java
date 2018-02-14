@@ -29,8 +29,9 @@ public class LectureImage
     {
         Fichier fichierFrontenacPpm = new Fichier("ppm","Sherbrooke_Frontenac_nuit",Charset.forName("US-ASCII"));
         Fichier fichierFrontenacPgm = new Fichier("pgm","Sherbrooke_Frontenac_nuit",Charset.forName("US-ASCII"));
-        Fichier fichierPpmTest = new Fichier("ppm","testPpm",Charset.forName("US-ASCII"));
-        Fichier fichierPgmTest = new Fichier("pgm","testPgm",Charset.forName("US-ASCII"));
+        Fichier testPpm = new Fichier("ppm","testPpm",Charset.forName("US-ASCII"));
+        Fichier testPgm = new Fichier("pgm","testPgm",Charset.forName("US-ASCII"));
+        Fichier testPpmPivot = new Fichier("ppm","testPpmPivot",Charset.forName("US-ASCII"));
         Fichier fichierPgmExtrait = new Fichier("pgm","imageExtraitPgm", Charset.forName("US-ASCII"));
         Image imageFrontenacPpm = new Image();
         Image imageFrontenacPpm2 = new Image();
@@ -43,11 +44,11 @@ public class LectureImage
         
         
         //Test d'écriture
-        TraiteurImage.ecrire(fichierPpmTest, imageFrontenacPpm);
-        TraiteurImage.ecrire(fichierPgmTest, imageFrontenacPgm);
+        TraiteurImage.ecrire(testPpm, imageFrontenacPpm);
+        TraiteurImage.ecrire(testPgm, imageFrontenacPgm);
         
         //Test sont_identiques
-        TraiteurImage.lire(imageFrontenacPpm2, fichierPpmTest);
+        TraiteurImage.lire(imageFrontenacPpm2, testPpm);
         if(TraiteurImage.sont_identique(imageFrontenacPpm, imageFrontenacPpm2))
         {
             System.out.println("Les deux images sont identiques!");
@@ -62,17 +63,18 @@ public class LectureImage
         System.out.println(Integer.toString(couleur.getRouge()) + " " + Integer.toString(couleur.getVert()) + " " + Integer.toString(couleur.getBleu()));
         
         //Test eclaircir_noircir
-        TraiteurImage.eclaircir_noircir(imageFrontenacPgm, 80);
-        TraiteurImage.eclaircir_noircir(imageFrontenacPpm, -90);
+        TraiteurImage.eclaircir_noircir(imageFrontenacPgm, 40);
+        TraiteurImage.eclaircir_noircir(imageFrontenacPpm, -40);
         
-        TraiteurImage.ecrire(fichierPgmTest,imageFrontenacPgm);
-        TraiteurImage.ecrire(fichierPpmTest,imageFrontenacPpm);
+        TraiteurImage.ecrire(testPgm,imageFrontenacPgm);
+        TraiteurImage.ecrire(testPpm,imageFrontenacPpm);
         
         //Test pivoter fonctionne pas
-        //TraiteurImage.pivoter90(imageFrontenacPpm);
+        TraiteurImage.pivoter90(imageFrontenacPpm);
+        TraiteurImage.ecrire(testPpmPivot, imageFrontenacPpm);
         
         //Test extraire
-        imageExtrait = TraiteurImage.extraire(imageFrontenacPgm, 50, 50, 120, 120);
+        imageExtrait = TraiteurImage.extraire(imageFrontenacPgm, 10, 10, 120, 120);
         TraiteurImage.ecrire(fichierPgmExtrait,imageExtrait);
     }
     
