@@ -31,9 +31,11 @@ public class LectureImage
         Fichier fichierFrontenacPgm = new Fichier("pgm","Sherbrooke_Frontenac_nuit",Charset.forName("US-ASCII"));
         Fichier fichierPpmTest = new Fichier("ppm","testPpm",Charset.forName("US-ASCII"));
         Fichier fichierPgmTest = new Fichier("pgm","testPgm",Charset.forName("US-ASCII"));
+        Fichier fichierPgmExtrait = new Fichier("pgm","imageExtraitPgm", Charset.forName("US-ASCII"));
         Image imageFrontenacPpm = new Image();
         Image imageFrontenacPpm2 = new Image();
         Image imageFrontenacPgm = new Image();
+        Image imageExtrait = new Image();
         
         //Test de lecture
         TraiteurImage.lire(imageFrontenacPpm, fichierFrontenacPpm);
@@ -65,8 +67,13 @@ public class LectureImage
         
         TraiteurImage.ecrire(fichierPgmTest,imageFrontenacPgm);
         TraiteurImage.ecrire(fichierPpmTest,imageFrontenacPpm);
+        
         //Test pivoter fonctionne pas
         //TraiteurImage.pivoter90(imageFrontenacPpm);
+        
+        //Test extraire
+        imageExtrait = TraiteurImage.extraire(imageFrontenacPgm, 50, 50, 120, 120);
+        TraiteurImage.ecrire(fichierPgmExtrait,imageExtrait);
     }
     
 }
