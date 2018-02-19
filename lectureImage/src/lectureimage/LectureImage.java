@@ -65,8 +65,8 @@ public class LectureImage
         System.out.println(Integer.toString(couleur.getRouge()) + " " + Integer.toString(couleur.getVert()) + " " + Integer.toString(couleur.getBleu()));
         
         //Test eclaircir_noircir
-        TraiteurImage.eclaircir_noircir(imageFrontenacPgm, 40);
-        TraiteurImage.eclaircir_noircir(imageFrontenacPpm, -40);
+        TraiteurImage.eclaircir_noircir(imageFrontenacPgm, 70);
+        TraiteurImage.eclaircir_noircir(imageFrontenacPpm, -70);
         
         TraiteurImage.ecrire(testPgm,imageFrontenacPgm);
         TraiteurImage.ecrire(testPpm,imageFrontenacPpm);
@@ -80,11 +80,19 @@ public class LectureImage
         TraiteurImage.ecrire(fichierPgmExtrait,imageExtrait);
 
         Fichier smallpgm = new Fichier("pgm","small", Charset.forName("US-ASCII"));
+        Fichier smallpivot = new Fichier("pgm","smallpivot", Charset.forName("US-ASCII"));
         Image imageSmall = new Image();
         TraiteurImage.lire(imageSmall,smallpgm);
         TraiteurImage.ecrire(smallpgm,imageSmall);
         TraiteurImage.pivoter90(imageSmall);
-        TraiteurImage.ecrire(smallpgm,imageSmall);
+        TraiteurImage.ecrire(smallpivot,imageSmall);
+        
+        Fichier smallCarre = new Fichier("pgm","smallCarre",Charset.forName("US-ASCII"));
+        Fichier reduirepgm = new Fichier("pgm","reduire",Charset.forName("US-ASCII"));
+        Image reduireimg = new Image();
+        TraiteurImage.lire(reduireimg,smallCarre);
+        TraiteurImage.reduire(reduireimg);
+        TraiteurImage.ecrire(reduirepgm, reduireimg);
         System.out.println("Fin");
     }
     

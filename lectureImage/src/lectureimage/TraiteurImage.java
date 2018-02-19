@@ -322,9 +322,47 @@ public class TraiteurImage
      * Réduit l'image de moitié en appliquant la moyenne des couleurs à chaque
      * quarts d'image réduit.
      */
-    public static void reduire(Image i)
+    public static void reduire(Image img)
     {
         
+        int nouvLarg = img.getLargeur()/2;
+        int nouvHaut = img.getHauteur()/2;
+        Pixel pixTemp = new Pixel(0,0,0);
+        int rougeAvg, vertAvg, bleuAvg;
+        rougeAvg = vertAvg = bleuAvg = 0;
+        Pixel[][] temp = new Pixel[nouvLarg][nouvHaut];
+        
+        int x,y;
+        x = y = 0;
+        for(int l=0;l<img.getHauteur();l+=2)
+        {
+            for(int k=0;k<img.getLargeur();k+=2)
+            {
+                for(int i =0;i<2;i++)
+                {
+                    for(int j=0;j<2;j++)
+                    {
+                        rougeAvg += img.getMatrice()[i+l][j+k].getRouge();
+                        vertAvg += img.getMatrice()[i+l][j+k].getVert();
+                        bleuAvg += img.getMatrice()[i+l][j+k].getBleu();     
+                    }
+                }
+                rougeAvg = rougeAvg/4;
+                vertAvg = vertAvg/4;
+                bleuAvg = bleuAvg/4;
+                
+                pixTemp = new Pixel(rougeAvg,vertAvg,bleuAvg);
+                temp[x][y] = pixTemp;
+                rougeAvg = vertAvg = bleuAvg = 0;
+                y++;
+            }
+            y=0;
+            x++;
+        }
+        
+        img.setLargeur(nouvLarg);
+        img.setHauteur(nouvHaut);
+        img.setMatrice(temp);
     }
     
     /**
