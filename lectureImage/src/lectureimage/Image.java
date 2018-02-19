@@ -47,6 +47,36 @@ public class Image {
         construireMatrice();
     }
     
+    public void afficherMatriceConsole()
+    {
+        if(format=="pgm")
+        {
+            for(int i=0;i<hauteur;i++)
+            {
+                for(int j=0;j<largeur;j++)
+                {
+                    System.out.print(Integer.toString(matrice[i][j].getRouge()) + " ");
+                }
+                
+            System.out.println();
+            }
+        }
+        else if (format=="ppm")
+        {
+            for(int i=0;i<hauteur;i++)
+            {
+                for(int j=0;j<largeur;j++)
+                {
+                    System.out.print(Integer.toString(matrice[i][j].getRouge()) + " ");
+                    System.out.print(Integer.toString(matrice[i][j].getVert()) + " ");
+                    System.out.print(Integer.toString(matrice[i][j].getBleu()) + " ");
+                }
+                
+            System.out.println();
+            }
+        }
+            
+    }
     /**
      * Construit la matrice selon la hauteur et la largeur de l'image
      */

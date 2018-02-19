@@ -18,9 +18,9 @@ package lectureimage;
  */
 public class Pixel 
 {
-    int rouge;  //Valeur RGB de rouge
-    int vert;   //Valeur RGB de vert
-    int bleu;   //Valeur RGB de bleu
+   private int rouge;  //Valeur RGB de rouge
+   private int vert;   //Valeur RGB de vert
+   private int bleu;   //Valeur RGB de bleu
 
     /**
      * Constructeur avec les valeurs RGB en paramètres
@@ -58,6 +58,7 @@ public class Pixel
         vert+=v;
         bleu+=v;
         
+        //On ne peut pas aller en bas de 0
         if(rouge<0)
             rouge =0;
         if(vert<0)
@@ -65,7 +66,16 @@ public class Pixel
         if(bleu<0)
             bleu=0;
         
+        //On ne peut pas aller en haut de 255
+        if(rouge>255)
+            rouge = 255;
+        if(vert>255)
+            vert = 255;
+        if(bleu>255)
+            bleu = 255;
     }
+    
+   
     
     /**
      * Getter pour le rouge

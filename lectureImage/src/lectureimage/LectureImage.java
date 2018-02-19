@@ -33,11 +33,13 @@ public class LectureImage
         Fichier testPgm = new Fichier("pgm","testPgm",Charset.forName("US-ASCII"));
         Fichier testPpmPivot = new Fichier("ppm","testPpmPivot",Charset.forName("US-ASCII"));
         Fichier fichierPgmExtrait = new Fichier("pgm","imageExtraitPgm", Charset.forName("US-ASCII"));
+        
         Image imageFrontenacPpm = new Image();
         Image imageFrontenacPpm2 = new Image();
         Image imageFrontenacPgm = new Image();
         Image imageExtrait = new Image();
-        
+           
+      
         //Test de lecture
         TraiteurImage.lire(imageFrontenacPpm, fichierFrontenacPpm);
         TraiteurImage.lire(imageFrontenacPgm, fichierFrontenacPgm);
@@ -76,6 +78,14 @@ public class LectureImage
         //Test extraire
         imageExtrait = TraiteurImage.extraire(imageFrontenacPgm, 10, 10, 120, 120);
         TraiteurImage.ecrire(fichierPgmExtrait,imageExtrait);
+
+        Fichier smallpgm = new Fichier("pgm","small", Charset.forName("US-ASCII"));
+        Image imageSmall = new Image();
+        TraiteurImage.lire(imageSmall,smallpgm);
+        TraiteurImage.ecrire(smallpgm,imageSmall);
+        TraiteurImage.pivoter90(imageSmall);
+        TraiteurImage.ecrire(smallpgm,imageSmall);
+        System.out.println("Fin");
     }
     
 }

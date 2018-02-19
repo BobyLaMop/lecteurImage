@@ -11,10 +11,9 @@ package lectureimage;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.Arrays;
+import java.io.OutputStreamWriter;
 import java.util.Scanner;
 
 /**
@@ -52,8 +51,8 @@ public class TraiteurImage
                 
                 //On change les propriétés de l'image
                 i.setFormat("pgm");
-                i.setHauteur(Integer.parseInt(ligneDiv[0]));
-                i.setLargeur(Integer.parseInt(ligneDiv[1]));
+                i.setLargeur(Integer.parseInt(ligneDiv[0]));
+                i.setHauteur(Integer.parseInt(ligneDiv[1]));
                 i.construireMatrice();
                 
                 //Lecture du chiffre max
@@ -88,8 +87,8 @@ public class TraiteurImage
                 
                 //On change les propriétés de l'image
                 i.setFormat("ppm");
-                i.setHauteur(Integer.parseInt(ligneDiv[0]));
-                i.setLargeur(Integer.parseInt(ligneDiv[1]));
+                i.setLargeur(Integer.parseInt(ligneDiv[0]));
+                i.setHauteur(Integer.parseInt(ligneDiv[1]));
                 i.construireMatrice();
                 
                 //Lecture du chiffre max
@@ -148,17 +147,16 @@ public class TraiteurImage
         //Si le fichier et l'image sont de même format 
         if (f.getType().equals(i.getFormat()))
         {
-
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(f.getFichier())))
+            try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f.getFichier()))))
             {
                 if (i.getFormat().equals("pgm"))
                 {
                     //Écriture de l'entete du fichier
                     writer.write("P2", 0, 2);
                     writer.newLine();
-                    writer.write(Integer.toString(i.getHauteur()), 0, Integer.toString(i.getHauteur()).length());
+                    writer.write(Integer.toString(i.getLargeur()), 0, Integer.toString(i.getLargeur()).length());
                     writer.write(" ", 0, 1);
-                    writer.write(Integer.toString(i.getLargeur()), 0, Integer.toString(i.getHauteur()).length());
+                    writer.write(Integer.toString(i.getHauteur()), 0, Integer.toString(i.getHauteur()).length());
                     writer.newLine();
                     writer.write("255", 0, 3);
                     writer.newLine();
@@ -178,9 +176,9 @@ public class TraiteurImage
                     //Écriture de l'entete du fichier
                     writer.write("P3", 0, 2);
                     writer.newLine();
-                    writer.write(Integer.toString(i.getHauteur()), 0, Integer.toString(i.getHauteur()).length());
+                    writer.write(Integer.toString(i.getLargeur()), 0, Integer.toString(i.getLargeur()).length());
                     writer.write(" ", 0, 1);
-                    writer.write(Integer.toString(i.getLargeur()), 0, Integer.toString(i.getHauteur()).length());
+                    writer.write(Integer.toString(i.getHauteur()), 0, Integer.toString(i.getHauteur()).length());
                     writer.newLine();
                     writer.write("255", 0, 3);
                     writer.newLine();
@@ -300,7 +298,7 @@ public class TraiteurImage
      * @param y1 Coordonne en y du point d'origine du sous ensemble voulu
      * @param x2 Coordonne en x du point de fin du sous ensemble voulu
      * @param y2 Coordonne en y du point de fin du sous ensemble voulu
-     * @return Si les deux images sont identiques ou non
+     * @return L'image extraite
      */
     public static Image extraire(Image i, int x1, int y1, int x2, int y2)
     {
@@ -338,16 +336,16 @@ public class TraiteurImage
         Pixel[][] temp = new Pixel[img.getLargeur()][img.getHauteur()];
         Pixel[][] photo = img.getMatrice();
 
-        for (int i = 0; i < img.getLargeur()-1; i++) 
+        for (int i = 0; i < img.getLargeur(); i++) 
         {
-            for (int j = 0, z = img.getHauteur()-1; j < img.getHauteur()-1; j++,z--) 
+            for (int j = 0; j < img.getHauteur(); j++) 
             {
-                temp[i][j] = photo[z][i];
+                temp[i][j] = photo[img.getHauteur()-1-j][i];
             }
         }
         int hauteurTemp = img.getHauteur();
         img.setMatrice(temp);
-        img.setHauteur(img.getLargeur()-1);
-        img.setLargeur(hauteurTemp-1);
+        img.setHauteur(img.getLargeur());
+        img.setLargeur(hauteurTemp);
     }
 }
